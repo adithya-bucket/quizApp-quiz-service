@@ -33,14 +33,10 @@ public class QuizService {
 
     public List<QuestionDTO> getQuizz(Integer id) {
       Optional<Quiz> quiz = quizRepository.findById(id);
-//      List<Questions>questionOfQuiz=quiz.get().getQuestions();
-      List<QuestionDTO>selectedQuestion = new ArrayList<>();
-//      for(Questions q :questionOfQuiz){
-//          QuestionDTO qdto =new QuestionDTO(q.getId(),q.getLevel(),q.getQuestion(),q.getOption1(),q.getOption2(),q.getOption3(),q.getOption4());
-//
-//          selectedQuestion.add(qdto);
-//      }
-      return selectedQuestion;
+      List<Integer>questionIds=quiz.get().getQuestionsIds();
+        List<QuestionDTO>questionDTOS= quizInterface.getQuestionFromId(questionIds).getBody();
+
+      return questionDTOS;
     }
 
     public Integer validateAnswer(List<Response> response , int id) {
